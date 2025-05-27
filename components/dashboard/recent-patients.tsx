@@ -74,20 +74,28 @@ export function RecentPatients() {
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const getStatusProps = (status: string) => {
+const getStatusProps = (status: string) => {
     switch (status) {
       case "Active":
+      case "Faol":
+      case "Активные":
         return { variant: "outline" as const, className: "border-blue-500 text-blue-500" }
       case "Critical":
+      case "Og'ir ahvoldagi":
+      case "Критические":
         return { variant: "destructive" as const }
       case "Stable":
+      case "Barqaror":
+      case "Стабильный":
         return { variant: "outline" as const, className: "border-green-500 text-green-500" }
       case "Recovering":
+      case "Tuzalayotgan":
+      case "Выздоравливающие":
         return { variant: "outline" as const, className: "border-yellow-500 text-yellow-500" }
       default:
         return { variant: "secondary" as const }
     }
-  }
+}
 
   const { variant, className } = getStatusProps(status)
 

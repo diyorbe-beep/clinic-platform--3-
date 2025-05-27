@@ -35,6 +35,7 @@ export const en = {
     overview: "Overview",
     analytics: "Analytics",
     reports: "Reports",
+    Stable: "Stable",
   },
   dashboard: {
     totalPatients: "Total Patients",
@@ -189,4 +190,20 @@ export const en = {
     ordered: "Ordered",
     results: "Results",
   },
+    other:{
+    type: "Type",
+    CheckUp: "Check-Up",
+    FollowUp: "Follow-Up",
+    Consultation: "Consultation",
+    LabReview: "Lab Review", 
+    View: "View",
+    Start: "Start",
+    tomorrow: "Tomorrow",
+    Male: "Male",
+    Female: "Female",
+    AllPatients: "All Patients",
+    Recent: "Recent",
+    Critical: "Critical",
+    Recovering: "Recovering",
+  }
 }

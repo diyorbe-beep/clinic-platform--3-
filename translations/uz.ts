@@ -40,7 +40,9 @@ export const uz = {
     yesterday: "Kecha",
     daysAgo: "kunlar oldin",
     week: "hafta oldin",
-    Stable: "barqaror"
+    Stable: "Barqaror",
+    TotalVisit: "Umumiy tashriflar",
+    NewPatients: "Yangi bemorlar",
   },
   dashboard: {
     totalPatients: "Jami bemorlar",
@@ -195,4 +197,20 @@ export const uz = {
     ordered: "Buyurtma qilingan",
     results: "Natijalar",
   },
+  other:{
+    type: "Tur",
+    CheckUp: "Tekshirish",
+    FollowUp: "Kuzatish",
+    Consultation: "Maslahat",
+    LabReview: "Laboratoriya tekshiruvi", 
+    View: "Ko'rish",
+    Start: "Boshlash",
+    tomorrow: "Kecha",
+    Male: "Erkak",
+    Female: "Ayol",
+    AllPatients: "Barcha bemorlar",
+    Recent: "Oxirgi",
+    Critical: "Og'ir ahvoldagi",
+    Recovering: "Tuzalayotgan",
+  }
 }

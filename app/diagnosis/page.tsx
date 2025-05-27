@@ -16,64 +16,68 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon, Search } from "lucide-react"
 import { format } from "date-fns"
 import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/language-context"
+import { useLanguageChange } from "@/hooks/use-language-change"
+
 
 // Sample patient data
-const patients = [
-  {
-    id: "P001",
-    name: "John Doe",
-    age: 45,
-    gender: "Male",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "P002",
-    name: "Sarah Johnson",
-    age: 32,
-    gender: "Female",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "P003",
-    name: "Michael Brown",
-    age: 58,
-    gender: "Male",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-]
-
-// Sample previous diagnoses
-const previousDiagnoses = [
-  {
-    id: "D001",
-    date: "2023-05-10",
-    diagnosis: "Hypertension",
-    description: "Blood pressure consistently above 140/90 mmHg.",
-    doctor: "Dr. Smith",
-  },
-  {
-    id: "D002",
-    date: "2023-03-15",
-    diagnosis: "Type 2 Diabetes",
-    description: "HbA1c levels at 7.2%. Patient advised on diet and exercise.",
-    doctor: "Dr. Johnson",
-  },
-  {
-    id: "D003",
-    date: "2022-11-22",
-    diagnosis: "Seasonal Allergies",
-    description: "Rhinitis and itchy eyes. Prescribed antihistamines.",
-    doctor: "Dr. Smith",
-  },
-]
-
 export default function DiagnosisPage() {
   const { toast } = useToast()
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null)
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [diagnosis, setDiagnosis] = useState("")
   const [description, setDescription] = useState("")
+  const { t } = useLanguage()
+  useLanguageChange()
 
+  const patients = [
+    {
+      id: "P001",
+      name: "John Doe",
+      age: 45,
+      gender: t("other.Male"),
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+    {
+      id: "P002",
+      name: "Sarah Johnson",
+      age: 32,
+      gender: "Female",
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+    {
+      id: "P003",
+      name: "Michael Brown",
+      age: 58,
+      gender: "Male",
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+  ]
+
+  // Sample previous diagnoses
+  const previousDiagnoses = [
+    {
+      id: "D001",
+      date: "2023-05-10",
+      diagnosis: "Hypertension",
+      description: "Blood pressure consistently above 140/90 mmHg.",
+      doctor: "Dr. Smith",
+    },
+    {
+      id: "D002",
+      date: "2023-03-15",
+      diagnosis: "Type 2 Diabetes",
+      description: "HbA1c levels at 7.2%. Patient advised on diet and exercise.",
+      doctor: "Dr. Johnson",
+    },
+    {
+      id: "D003",
+      date: "2022-11-22",
+      diagnosis: "Seasonal Allergies",
+      description: "Rhinitis and itchy eyes. Prescribed antihistamines.",
+      doctor: "Dr. Smith",
+    },
+  ]
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -119,9 +123,8 @@ export default function DiagnosisPage() {
               {patients.map((patient) => (
                 <div
                   key={patient.id}
-                  className={`flex items-center gap-3 p-2 rounded-md cursor-pointer ${
-                    selectedPatient === patient.id ? "bg-primary/10 border border-primary/20" : "hover:bg-muted"
-                  }`}
+                  className={`flex items-center gap-3 p-2 rounded-md cursor-pointer ${selectedPatient === patient.id ? "bg-primary/10 border border-primary/20" : "hover:bg-muted"
+                    }`}
                   onClick={() => setSelectedPatient(patient.id)}
                 >
                   <Avatar>
@@ -131,7 +134,7 @@ export default function DiagnosisPage() {
                   <div>
                     <div className="font-medium">{patient.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      {patient.age} years • {patient.gender} • ID: {patient.id}
+                      {patient.age} {t("common.years")} • {patient.gender} • ID: {patient.id}
                     </div>
                   </div>
                 </div>

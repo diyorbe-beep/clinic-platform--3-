@@ -9,7 +9,7 @@ import {
   ChartLegendItem,
 } from "@/components/ui/chart"
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis } from "recharts"
-
+import { useLanguage } from "@/contexts/language-context"
 const data = [
   { month: "Jan", patients: 120, newPatients: 40 },
   { month: "Feb", patients: 150, newPatients: 45 },
@@ -26,6 +26,7 @@ const data = [
 ]
 
 export function DashboardChart() {
+    const { t } = useLanguage()
   return (
     <ChartContainer className="h-[300px]">
       <ChartLegend className="mb-4">

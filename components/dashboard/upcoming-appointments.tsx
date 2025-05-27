@@ -7,14 +7,20 @@ import { Calendar, Clock } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 import { useLanguageChange } from "@/hooks/use-language-change"
 
+
+export function UpcomingAppointments() {
+  const { t } = useLanguage()
+  // Force re-render when language changes
+  useLanguageChange()
+
 const appointments = [
   {
     id: "1",
     patientName: "John Doe",
     patientAvatar: "/placeholder.svg?height=32&width=32",
     time: "10:00 AM",
-    date: "Today",
-    type: "Check-up",
+    date: t("common.today"),
+    type: t("other.CheckUp"),
     duration: "30 min",
   },
   {
@@ -22,8 +28,8 @@ const appointments = [
     patientName: "Sarah Johnson",
     patientAvatar: "/placeholder.svg?height=32&width=32",
     time: "11:30 AM",
-    date: "Today",
-    type: "Follow-up",
+    date: t("common.today"),
+    type: t("other.FollowUp"),
     duration: "45 min",
   },
   {
@@ -31,8 +37,8 @@ const appointments = [
     patientName: "Michael Brown",
     patientAvatar: "/placeholder.svg?height=32&width=32",
     time: "2:15 PM",
-    date: "Today",
-    type: "Consultation",
+    date: t("common.today"),
+    type: t("other.Consultation"),
     duration: "60 min",
   },
   {
@@ -40,8 +46,8 @@ const appointments = [
     patientName: "Emily Wilson",
     patientAvatar: "/placeholder.svg?height=32&width=32",
     time: "9:00 AM",
-    date: "Tomorrow",
-    type: "Check-up",
+    date: t("other.tomorrow"),
+    type: t("other.CheckUp"),
     duration: "30 min",
   },
   {
@@ -49,26 +55,21 @@ const appointments = [
     patientName: "Robert Garcia",
     patientAvatar: "/placeholder.svg?height=32&width=32",
     time: "10:45 AM",
-    date: "Tomorrow",
-    type: "Lab Review",
+    date: t("other.tomorrow"),
+    type: t("other.LabReview"),
     duration: "45 min",
   },
 ]
-
-export function UpcomingAppointments() {
-  const { t } = useLanguage()
-  // Force re-render when language changes
-  useLanguageChange()
 
   return (
     <div className="space-y-4">
       <div className="rounded-md border">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] lg:grid-cols-[1fr_1fr_1fr_1fr_auto] p-4 text-sm font-medium">
           <div>Patient</div>
-          <div className="hidden md:block">Time</div>
-          <div className="hidden lg:block">Date</div>
-          <div>Type</div>
-          <div className="text-right">Actions</div>
+          <div className="hidden md:block">{t("schedule.time")}</div>
+          <div className="hidden lg:block">{t("labResults.date")}</div>
+          <div>{t("other.type")}</div>
+          <div className="text-right">{t("other.Start")}</div>
         </div>
         <div className="divide-y">
           {appointments.map((appointment) => (
@@ -102,9 +103,9 @@ export function UpcomingAppointments() {
               </div>
               <div className="flex justify-end gap-2">
                 <Button size="sm" variant="outline">
-                  View
+                  {t("other.View")}
                 </Button>
-                <Button size="sm">Start</Button>
+                <Button size="sm">{t("other.Start")}</Button>
               </div>
             </div>
           ))}

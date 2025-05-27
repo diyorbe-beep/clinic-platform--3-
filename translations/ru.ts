@@ -190,4 +190,20 @@ export const ru = {
     ordered: "Заказано",
     results: "Результаты",
   },
+  other:{
+    type: "тип",
+    CheckUp: "Проверять",
+    FollowUp: "Следовать за",
+    Consultation: "Консультация",
+    LabReview: "Обзор лаборатории", 
+    View: "вид",
+    Start: "Начинать",
+    tomorrow: "завтра",
+    Male: "Мужчина",
+    Female: "Женщина",
+    AllPatients: "Все пациенты",
+    Recent: "Недавние",
+    Critical: "Критический",
+    Recovering: "Восстановление",
+  }
 }
