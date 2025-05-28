@@ -18,98 +18,102 @@ import { CalendarIcon, Download, Eye, FileText, Search, Upload } from "lucide-re
 import { format } from "date-fns"
 import { useToast } from "@/hooks/use-toast"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
-// Sample patient data
-const patients = [
-  {
-    id: "P001",
-    name: "John Doe",
-    age: 45,
-    gender: "Male",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "P002",
-    name: "Sarah Johnson",
-    age: 32,
-    gender: "Female",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "P003",
-    name: "Michael Brown",
-    age: 58,
-    gender: "Male",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-]
-
-// Sample lab results
-const labResults = [
-  {
-    id: "L001",
-    patientId: "P001",
-    testName: "Complete Blood Count (CBC)",
-    date: "2023-05-10",
-    resultDate: "2023-05-12",
-    status: "Completed",
-    doctor: "Dr. Smith",
-    fileUrl: "#",
-    notes: "Normal results. No significant abnormalities detected.",
-  },
-  {
-    id: "L002",
-    patientId: "P001",
-    testName: "Lipid Panel",
-    date: "2023-05-10",
-    resultDate: "2023-05-12",
-    status: "Completed",
-    doctor: "Dr. Smith",
-    fileUrl: "#",
-    notes: "Cholesterol levels slightly elevated. Recommend dietary changes.",
-  },
-  {
-    id: "L003",
-    patientId: "P002",
-    testName: "Thyroid Function Test",
-    date: "2023-05-15",
-    resultDate: "2023-05-17",
-    status: "Completed",
-    doctor: "Dr. Johnson",
-    fileUrl: "#",
-    notes: "TSH levels within normal range.",
-  },
-  {
-    id: "L004",
-    patientId: "P003",
-    testName: "Comprehensive Metabolic Panel",
-    date: "2023-05-08",
-    resultDate: null,
-    status: "Pending",
-    doctor: "Dr. Wilson",
-    fileUrl: null,
-    notes: "Awaiting results from the laboratory.",
-  },
-  {
-    id: "L005",
-    patientId: "P003",
-    testName: "Hemoglobin A1C",
-    date: "2023-05-08",
-    resultDate: "2023-05-10",
-    status: "Completed",
-    doctor: "Dr. Wilson",
-    fileUrl: "#",
-    notes: "HbA1c at 7.2%. Indicates need for better glucose control.",
-  },
-]
+import { useLanguage } from "@/contexts/language-context"
+import { useLanguageChange } from "@/hooks/use-language-change"
 
 export default function LabResultsPage() {
+  const { t } = useLanguage()
+  useLanguageChange()
   const { toast } = useToast()
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null)
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [testName, setTestName] = useState("")
   const [notes, setNotes] = useState("")
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
+  // Sample patient data
+  const patients = [
+    {
+      id: "P001",
+      name: "John Doe",
+      age: 45,
+      gender: t("other.Male"),
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+    {
+      id: "P002",
+      name: "Sarah Johnson",
+      age: 32,
+      gender: "Female",
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+    {
+      id: "P003",
+      name: "Michael Brown",
+      age: 58,
+      gender: "Male",
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+  ]
+
+  // Sample lab results
+  const labResults = [
+    {
+      id: "L001",
+      patientId: "P001",
+      testName: "Complete Blood Count (CBC)",
+      date: "2023-05-10",
+      resultDate: "2023-05-12",
+      status: "Completed",
+      doctor: "Dr. Smith",
+      fileUrl: "#",
+      notes: "Normal results. No significant abnormalities detected.",
+    },
+    {
+      id: "L002",
+      patientId: "P001",
+      testName: "Lipid Panel",
+      date: "2023-05-10",
+      resultDate: "2023-05-12",
+      status: "Completed",
+      doctor: "Dr. Smith",
+      fileUrl: "#",
+      notes: "Cholesterol levels slightly elevated. Recommend dietary changes.",
+    },
+    {
+      id: "L003",
+      patientId: "P002",
+      testName: "Thyroid Function Test",
+      date: "2023-05-15",
+      resultDate: "2023-05-17",
+      status: "Completed",
+      doctor: "Dr. Johnson",
+      fileUrl: "#",
+      notes: "TSH levels within normal range.",
+    },
+    {
+      id: "L004",
+      patientId: "P003",
+      testName: "Comprehensive Metabolic Panel",
+      date: "2023-05-08",
+      resultDate: null,
+      status: "Pending",
+      doctor: "Dr. Wilson",
+      fileUrl: null,
+      notes: "Awaiting results from the laboratory.",
+    },
+    {
+      id: "L005",
+      patientId: "P003",
+      testName: "Hemoglobin A1C",
+      date: "2023-05-08",
+      resultDate: "2023-05-10",
+      status: "Completed",
+      doctor: "Dr. Wilson",
+      fileUrl: "#",
+      notes: "HbA1c at 7.2%. Indicates need for better glucose control.",
+    },
+  ]
 
   const patientLabResults = selectedPatient
     ? labResults.filter((result) => result.patientId === selectedPatient)
@@ -297,9 +301,8 @@ export default function LabResultsPage() {
                   {patients.map((patient) => (
                     <div
                       key={patient.id}
-                      className={`flex items-center gap-3 p-2 rounded-md cursor-pointer ${
-                        selectedPatient === patient.id ? "bg-primary/10 border border-primary/20" : "hover:bg-muted"
-                      }`}
+                      className={`flex items-center gap-3 p-2 rounded-md cursor-pointer ${selectedPatient === patient.id ? "bg-primary/10 border border-primary/20" : "hover:bg-muted"
+                        }`}
                       onClick={() => setSelectedPatient(patient.id)}
                     >
                       <Avatar>
@@ -309,7 +312,7 @@ export default function LabResultsPage() {
                       <div>
                         <div className="font-medium">{patient.name}</div>
                         <div className="text-sm text-muted-foreground">
-                          {patient.age} years • {patient.gender} • ID: {patient.id}
+                          {patient.age} {t("common.years")} • {patient.gender} • ID: {patient.id}
                         </div>
                       </div>
                     </div>
@@ -341,11 +344,10 @@ export default function LabResultsPage() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={`w-full justify-start text-left font-normal ${
-                            !date ? "text-muted-foreground" : ""
-                          }`}
+                          className={`w-full justify-start text-left font-normal ${!date ? "text-muted-foreground" : ""
+                            }`}
                         >
-                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                          {date ? format(date, "PPP") : <span>{t("other.PickDate")}</span>}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                       </PopoverTrigger>

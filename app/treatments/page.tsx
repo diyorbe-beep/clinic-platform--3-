@@ -17,7 +17,8 @@ import { CalendarIcon, Plus, Search } from "lucide-react"
 import { format } from "date-fns"
 import { useToast } from "@/hooks/use-toast"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
+import { useLanguage } from "@/contexts/language-context"
+import { useLanguageChange } from "@/hooks/use-language-change"
 // Sample patient data
 const patients = [
   {
@@ -105,6 +106,8 @@ const activePatientTreatments = [
 ]
 
 export default function TreatmentsPage() {
+    const { t } = useLanguage()
+  useLanguageChange()
   const { toast } = useToast()
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null)
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null)
@@ -200,7 +203,7 @@ export default function TreatmentsPage() {
                       <div>
                         <div className="font-medium">{patient.name}</div>
                         <div className="text-sm text-muted-foreground">
-                          {patient.age} years • {patient.gender} • ID: {patient.id}
+                          {patient.age} {t("patients.years")} • {patient.gender} • ID: {patient.id}
                         </div>
                       </div>
                     </div>

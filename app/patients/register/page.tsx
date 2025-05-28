@@ -18,59 +18,66 @@ import { format } from "date-fns"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
 
-const formSchema = z.object({
-  firstName: z.string().min(2, {
-    message: "First name must be at least 2 characters.",
-  }),
-  lastName: z.string().min(2, {
-    message: "Last name must be at least 2 characters.",
-  }),
-  dateOfBirth: z.date({
-    required_error: "Date of birth is required.",
-  }),
-  gender: z.string({
-    required_error: "Please select a gender.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  phone: z.string().min(10, {
-    message: "Phone number must be at least 10 digits.",
-  }),
-  address: z.string().min(5, {
-    message: "Address must be at least 5 characters.",
-  }),
-  city: z.string().min(2, {
-    message: "City must be at least 2 characters.",
-  }),
-  state: z.string().min(2, {
-    message: "State must be at least 2 characters.",
-  }),
-  zipCode: z.string().min(5, {
-    message: "Zip code must be at least 5 characters.",
-  }),
-  emergencyContactName: z.string().min(2, {
-    message: "Emergency contact name must be at least 2 characters.",
-  }),
-  emergencyContactPhone: z.string().min(10, {
-    message: "Emergency contact phone must be at least 10 digits.",
-  }),
-  insuranceProvider: z.string().optional(),
-  insurancePolicyNumber: z.string().optional(),
-  allergies: z.string().optional(),
-  medicalHistory: z.string().optional(),
-  currentMedications: z.string().optional(),
-  consentToTreatment: z.boolean().refine((val) => val === true, {
-    message: "You must agree to receive treatment.",
-  }),
-  privacyPolicy: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the privacy policy.",
-  }),
-})
+import { useLanguage } from "@/contexts/language-context"
+import { useLanguageChange } from "@/hooks/use-language-change"
+
 
 export default function PatientRegistrationPage() {
+  const { t } = useLanguage()
+  useLanguageChange()
   const { toast } = useToast()
   const [step, setStep] = useState(1)
+
+  const formSchema = z.object({
+    firstName: z.string().min(2, {
+      message: t("other.firstNameMessage"),
+    }),
+    lastName: z.string().min(2, {
+      message: t("other.lastNameMessage"),
+    }),
+    dateOfBirth: z.date({
+      required_error: t("other.dateOfBirth"),
+    }),
+    gender: z.string({
+      required_error: t("other.genderMessage"),
+    }),
+    email: z.string().email({
+      message: t("other.emailMessage"),
+    }),
+    phone: z.string().min(10, {
+      message: t("other.phoneMessage"),
+    }),
+    address: z.string().min(5, {
+      message: t("other.addressMessage"),
+    }),
+    city: z.string().min(2, {
+      message: t("other.cityMessage"),
+    }),
+    state: z.string().min(2, {
+      message: t("other.stateMessage"),
+    }),
+    zipCode: z.string().min(5, {
+      message: t("other.zipCodeMessage"),
+    }),
+    emergencyContactName: z.string().min(2, {
+      message: t("other.emergencyContactNameMessage"),
+    }),
+    emergencyContactPhone: z.string().min(10, {
+      message: t("other.emergencyContactPhoneMessage"),
+    }),
+    insuranceProvider: z.string().optional(),
+    insurancePolicyNumber: z.string().optional(),
+    allergies: z.string().optional(),
+    medicalHistory: z.string().optional(),
+    currentMedications: z.string().optional(),
+    consentToTreatment: z.boolean().refine((val) => val === true, {
+      message: "You must agree to receive treatment.",
+    }),
+    privacyPolicy: z.boolean().refine((val) => val === true, {
+      message: "You must agree to the privacy policy.",
+    }),
+  })
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -132,26 +139,26 @@ export default function PatientRegistrationPage() {
             <ChevronLeft className="h-4 w-4" />
           </Button>
         </Link>
-        <h2 className="text-3xl font-bold tracking-tight">Patient Registration</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("other.PatientRegistration")}</h2>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>New Patient Information</CardTitle>
+          <CardTitle>{t("other.NewPatientInformation")}</CardTitle>
           <CardDescription>
-            Register a new patient in the system. All fields marked with * are required.
+            {t("other.RegisterPatient")} 
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex justify-between mb-8">
             <div className={`flex-1 border-b-2 pb-2 ${step >= 1 ? "border-primary" : "border-muted"}`}>
-              Step 1: Personal Information
+              {t("other.Step1")}
             </div>
             <div className={`flex-1 border-b-2 pb-2 ${step >= 2 ? "border-primary" : "border-muted"}`}>
-              Step 2: Contact Details
+              {t("other.Step2")}
             </div>
             <div className={`flex-1 border-b-2 pb-2 ${step >= 3 ? "border-primary" : "border-muted"}`}>
-              Step 3: Medical Information
+              {t("other.Step3")}
             </div>
           </div>
 
@@ -165,7 +172,7 @@ export default function PatientRegistrationPage() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Name *</FormLabel>
+                          <FormLabel>{t("other.FirstName")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="John" {...field} />
                           </FormControl>
@@ -178,7 +185,7 @@ export default function PatientRegistrationPage() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last Name *</FormLabel>
+                          <FormLabel>{t("other.LastName")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="Doe" {...field} />
                           </FormControl>
@@ -194,17 +201,16 @@ export default function PatientRegistrationPage() {
                       name="dateOfBirth"
                       render={({ field }) => (
                         <FormItem className="flex flex-col">
-                          <FormLabel>Date of Birth *</FormLabel>
+                          <FormLabel>{t("other.DateBirth")} *</FormLabel>
                           <Popover>
                             <PopoverTrigger asChild>
                               <FormControl>
                                 <Button
                                   variant={"outline"}
-                                  className={`w-full pl-3 text-left font-normal ${
-                                    !field.value ? "text-muted-foreground" : ""
-                                  }`}
+                                  className={`w-full pl-3 text-left font-normal ${!field.value ? "text-muted-foreground" : ""
+                                    }`}
                                 >
-                                  {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                                  {field.value ? format(field.value, "PPP") : <span>{t("other.PickDate")}</span>}
                                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                 </Button>
                               </FormControl>
@@ -229,18 +235,16 @@ export default function PatientRegistrationPage() {
                       name="gender"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Gender *</FormLabel>
+                          <FormLabel>{t("other.Gender")} *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select gender" />
+                                <SelectValue placeholder={t("other.SelectGender")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="male">Male</SelectItem>
-                              <SelectItem value="female">Female</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                              <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                              <SelectItem value="male">{t("other.Male")} </SelectItem>
+                              <SelectItem value="female">{t("other.Female")} </SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -255,7 +259,7 @@ export default function PatientRegistrationPage() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email *</FormLabel>
+                          <FormLabel>{t("other.Email")} *</FormLabel>
                           <FormControl>
                             <Input type="email" placeholder="john.doe@example.com" {...field} />
                           </FormControl>
@@ -268,7 +272,7 @@ export default function PatientRegistrationPage() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone Number *</FormLabel>
+                          <FormLabel>{t("other.PhoneNumber")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="(555) 123-4567" {...field} />
                           </FormControl>
@@ -287,7 +291,7 @@ export default function PatientRegistrationPage() {
                     name="address"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Address *</FormLabel>
+                        <FormLabel>{t("other.Address")} *</FormLabel>
                         <FormControl>
                           <Input placeholder="123 Main St" {...field} />
                         </FormControl>
@@ -302,7 +306,7 @@ export default function PatientRegistrationPage() {
                       name="city"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>City *</FormLabel>
+                          <FormLabel>{t("other.City")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="Anytown" {...field} />
                           </FormControl>
@@ -315,7 +319,7 @@ export default function PatientRegistrationPage() {
                       name="state"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>State *</FormLabel>
+                          <FormLabel>{t("other.State")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="CA" {...field} />
                           </FormControl>
@@ -328,7 +332,7 @@ export default function PatientRegistrationPage() {
                       name="zipCode"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Zip Code *</FormLabel>
+                          <FormLabel>{t("other.ZipCode")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="12345" {...field} />
                           </FormControl>
@@ -344,7 +348,7 @@ export default function PatientRegistrationPage() {
                       name="emergencyContactName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Emergency Contact Name *</FormLabel>
+                          <FormLabel>{t("other.EmergencyContactName")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="Jane Doe" {...field} />
                           </FormControl>
@@ -357,7 +361,7 @@ export default function PatientRegistrationPage() {
                       name="emergencyContactPhone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Emergency Contact Phone *</FormLabel>
+                          <FormLabel>{t("other.EmergencyContactPhone")} *</FormLabel>
                           <FormControl>
                             <Input placeholder="(555) 987-6543" {...field} />
                           </FormControl>
@@ -377,11 +381,11 @@ export default function PatientRegistrationPage() {
                       name="insuranceProvider"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Insurance Provider</FormLabel>
+                          <FormLabel>{t("other.insuranceProviderMessage")}</FormLabel>
                           <FormControl>
                             <Input placeholder="Insurance Company" {...field} />
                           </FormControl>
-                          <FormDescription>Leave blank if self-pay</FormDescription>
+                          <FormDescription>{t("other.LeaveBlankIf")}</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -391,7 +395,7 @@ export default function PatientRegistrationPage() {
                       name="insurancePolicyNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Insurance Policy Number</FormLabel>
+                          <FormLabel>{t("other.InsurancePolicyNumber")}</FormLabel>
                           <FormControl>
                             <Input placeholder="Policy #" {...field} />
                           </FormControl>
@@ -406,7 +410,7 @@ export default function PatientRegistrationPage() {
                     name="allergies"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Allergies</FormLabel>
+                        <FormLabel>{t("other.Allergies")}</FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="List any allergies (medications, food, etc.)"
@@ -424,7 +428,7 @@ export default function PatientRegistrationPage() {
                     name="medicalHistory"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Medical History</FormLabel>
+                        <FormLabel>{t("other.MedicalHistory")}</FormLabel>
                         <FormControl>
                           <Textarea placeholder="Relevant medical history" className="min-h-[80px]" {...field} />
                         </FormControl>
@@ -438,7 +442,7 @@ export default function PatientRegistrationPage() {
                     name="currentMedications"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Current Medications</FormLabel>
+                        <FormLabel>{t("other.CurrentMedications")}</FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="List all current medications and dosages"
@@ -461,9 +465,9 @@ export default function PatientRegistrationPage() {
                             <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                           </FormControl>
                           <div className="space-y-1 leading-none">
-                            <FormLabel>I consent to receive treatment *</FormLabel>
+                            <FormLabel>{t("other.ITreatment")} *</FormLabel>
                             <FormDescription>
-                              By checking this box, you consent to receive medical treatment from our clinic.
+                              {t("other.ByChecking")}
                             </FormDescription>
                           </div>
                           <FormMessage />
@@ -480,10 +484,9 @@ export default function PatientRegistrationPage() {
                             <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                           </FormControl>
                           <div className="space-y-1 leading-none">
-                            <FormLabel>I agree to the privacy policy *</FormLabel>
+                            <FormLabel>{t("other.PrivacyPolicy")} *</FormLabel>
                             <FormDescription>
-                              By checking this box, you agree to our privacy policy regarding the handling of your
-                              medical information.
+                              {t("other.ByCheck")}
                             </FormDescription>
                           </div>
                           <FormMessage />
@@ -497,20 +500,20 @@ export default function PatientRegistrationPage() {
               <div className="flex justify-between pt-4">
                 {step > 1 ? (
                   <Button type="button" variant="outline" onClick={prevStep}>
-                    Previous
+                    {t("other.Previous")}
                   </Button>
                 ) : (
                   <Link href="/patients">
-                    <Button variant="outline">Cancel</Button>
+                    <Button variant="outline">{t("other.Cancel")}</Button>
                   </Link>
                 )}
 
                 {step < 3 ? (
                   <Button type="button" onClick={nextStep}>
-                    Next
+                    {t("other.Next")}
                   </Button>
                 ) : (
-                  <Button type="submit">Register Patient</Button>
+                  <Button type="submit">{t("other.RegisterPatient1")}</Button>
                 )}
               </div>
             </form>

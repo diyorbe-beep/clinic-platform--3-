@@ -42,14 +42,14 @@ export default function DiagnosisPage() {
       id: "P002",
       name: "Sarah Johnson",
       age: 32,
-      gender: "Female",
+      gender: t("other.Female"),
       avatar: "/placeholder.svg?height=40&width=40",
     },
     {
       id: "P003",
       name: "Michael Brown",
       age: 58,
-      gender: "Male",
+      gender: t("other.Male"),
       avatar: "/placeholder.svg?height=40&width=40",
     },
   ]
@@ -59,22 +59,22 @@ export default function DiagnosisPage() {
     {
       id: "D001",
       date: "2023-05-10",
-      diagnosis: "Hypertension",
-      description: "Blood pressure consistently above 140/90 mmHg.",
+      diagnosis: t("other.Hypertension"),
+      description: t("other.BloodPressure"),
       doctor: "Dr. Smith",
     },
     {
       id: "D002",
       date: "2023-03-15",
-      diagnosis: "Type 2 Diabetes",
-      description: "HbA1c levels at 7.2%. Patient advised on diet and exercise.",
+      diagnosis: t("other.Type2Diabetes"),
+      description: t("other.HbA1cLevels"),
       doctor: "Dr. Johnson",
     },
     {
       id: "D003",
       date: "2022-11-22",
-      diagnosis: "Seasonal Allergies",
-      description: "Rhinitis and itchy eyes. Prescribed antihistamines.",
+      diagnosis: t("other.SeasonalAllergies"),
+      description: t("other.RhinitisPrescribed"),
       doctor: "Dr. Smith",
     },
   ]
@@ -104,19 +104,19 @@ export default function DiagnosisPage() {
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold tracking-tight">Diagnosis</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("other.Diagnosis")}</h2>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Select Patient</CardTitle>
-            <CardDescription>Search and select a patient to add a diagnosis</CardDescription>
+            <CardTitle>{t("other.SelectPatient")}</CardTitle>
+            <CardDescription>{t("other.SearchDiagnosis")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="relative mb-4">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input type="search" placeholder="Search patients..." className="pl-8" />
+              <Input type="search" placeholder={t("other.SearchPatients")} className="pl-8" />
             </div>
 
             <div className="space-y-2">
@@ -134,7 +134,7 @@ export default function DiagnosisPage() {
                   <div>
                     <div className="font-medium">{patient.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      {patient.age} {t("common.years")} • {patient.gender} • ID: {patient.id}
+                      {patient.age} {t("patients.years")} • {patient.gender} • ID: {patient.id}
                     </div>
                   </div>
                 </div>
@@ -145,20 +145,20 @@ export default function DiagnosisPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Add Diagnosis</CardTitle>
-            <CardDescription>Record a new diagnosis for the selected patient</CardDescription>
+            <CardTitle>{t("other.AddDiagnosis")}</CardTitle>
+            <CardDescription>{t("diagnosis.recordDiagnosis")}</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="date">Date</Label>
+                <Label htmlFor="date">{t("diagnosis.date")}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant={"outline"}
                       className={`w-full justify-start text-left font-normal ${!date ? "text-muted-foreground" : ""}`}
                     >
-                      {date ? format(date, "PPP") : <span>Pick a date</span>}
+                      {date ? format(date, "PPP") : <span>{t("diagnosis.pickDate")}</span>}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </PopoverTrigger>
@@ -169,20 +169,20 @@ export default function DiagnosisPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="diagnosis">Diagnosis</Label>
+                <Label htmlFor="diagnosis">{t("other.Diagnosis")}</Label>
                 <Input
                   id="diagnosis"
-                  placeholder="Enter diagnosis"
+                  placeholder={t("diagnosis.enterDiagnosis")}
                   value={diagnosis}
                   onChange={(e) => setDiagnosis(e.target.value)}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">{t("diagnosis.description")}</Label>
                 <Textarea
                   id="description"
-                  placeholder="Enter detailed description of the diagnosis"
+                  placeholder={t("diagnosis.enterDescription")}
                   className="min-h-[120px]"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -194,7 +194,7 @@ export default function DiagnosisPage() {
                 className="w-full"
                 disabled={!selectedPatient || !date || !diagnosis || !description}
               >
-                Add Diagnosis
+                {t("diagnosis.addDiagnosis")}
               </Button>
             </form>
           </CardContent>
@@ -204,19 +204,19 @@ export default function DiagnosisPage() {
       {selectedPatient && (
         <Card>
           <CardHeader>
-            <CardTitle>Previous Diagnoses</CardTitle>
+            <CardTitle>{t("diagnosis.previousDiagnoses")}</CardTitle>
             <CardDescription>
-              Medical history for {patients.find((p) => p.id === selectedPatient)?.name}
+              {t("other.MedicalHistoryFor")} {patients.find((p) => p.id === selectedPatient)?.name}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Diagnosis</TableHead>
-                  <TableHead>Description</TableHead>
-                  <TableHead>Doctor</TableHead>
+                  <TableHead>{t("diagnosis.date")}</TableHead>
+                  <TableHead>{t("other.Diagnosis")}</TableHead>
+                  <TableHead>{t("diagnosis.description")}</TableHead>
+                  <TableHead>{t("diagnosis.doctor")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

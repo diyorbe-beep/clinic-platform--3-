@@ -16,102 +16,103 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ChevronLeft, ChevronRight, FileText, MoreHorizontal, Plus, Search, Stethoscope } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
-
+import { useLanguageChange } from "@/hooks/use-language-change"
 // Sample patient data
+
+
+export default function PatientsPage() {
+  const { t } = useLanguage()
+    useLanguageChange()
 const patients = [
   {
     id: "P001",
     name: "John Doe",
     age: 45,
-    gender: "Male",
+    gender: t("other.Male"),
     phone: "(555) 123-4567",
     email: "john.doe@example.com",
     lastVisit: "2023-05-15",
-    status: "Active",
+    status: t("common.active"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "P002",
     name: "Sarah Johnson",
     age: 32,
-    gender: "Female",
+    gender: t("other.Female"),
     phone: "(555) 234-5678",
     email: "sarah.j@example.com",
     lastVisit: "2023-05-20",
-    status: "Active",
+    status: t("patients.critical"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "P003",
     name: "Michael Brown",
     age: 58,
-    gender: "Male",
+    gender: t("other.Male"),
     phone: "(555) 345-6789",
     email: "m.brown@example.com",
     lastVisit: "2023-05-10",
-    status: "Critical",
+    status: t("common.active"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "P004",
     name: "Emily Wilson",
     age: 27,
-    gender: "Female",
+    gender: t("other.Female"),
     phone: "(555) 456-7890",
     email: "emily.w@example.com",
     lastVisit: "2023-05-05",
-    status: "Stable",
+    status: t("common.Stable"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "P005",
     name: "Robert Garcia",
     age: 63,
-    gender: "Male",
+    gender: t("other.Male"),
     phone: "(555) 567-8901",
     email: "r.garcia@example.com",
     lastVisit: "2023-04-28",
-    status: "Recovering",
+    status: t("patients.recovering"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "P006",
     name: "Jennifer Lee",
     age: 41,
-    gender: "Female",
+    gender: t("other.Female"),
     phone: "(555) 678-9012",
     email: "j.lee@example.com",
     lastVisit: "2023-05-18",
-    status: "Active",
+    status: t("common.active"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "P007",
     name: "David Kim",
     age: 36,
-    gender: "Male",
+    gender: t("other.Male"),
     phone: "(555) 789-0123",
     email: "d.kim@example.com",
     lastVisit: "2023-05-12",
-    status: "Active",
+    status: t("common.active"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "P008",
     name: "Lisa Chen",
     age: 29,
-    gender: "Female",
+    gender: t("other.Female"),
     phone: "(555) 890-1234",
     email: "l.chen@example.com",
     lastVisit: "2023-05-08",
-    status: "Active",
+    status: t("common.active"),
     avatar: "/placeholder.svg?height=40&width=40",
   },
 ]
-
-export default function PatientsPage() {
-  const { t } = useLanguage()
-
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between">
@@ -139,16 +140,16 @@ export default function PatientsPage() {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Button variant="outline" size="sm">
-            All Patients
+            {t("other.AllPatients")}
           </Button>
           <Button variant="outline" size="sm">
-            Recent
+            {t("other.Recent")}
           </Button>
           <Button variant="outline" size="sm">
-            Critical
+            {t("other.Critical")}
           </Button>
           <Button variant="outline" size="sm">
-            Recovering
+            {t("other.Recovering")}
           </Button>
         </div>
       </div>
@@ -157,11 +158,11 @@ export default function PatientsPage() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Patient</TableHead>
+              <TableHead>{t("common.patients")}</TableHead>
               <TableHead>ID</TableHead>
-              <TableHead>Contact</TableHead>
-              <TableHead>Last Visit</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>{t("patients.contact")}</TableHead>
+              <TableHead>{t("patients.lastVisit")}</TableHead>
+              <TableHead>{t("users.status")}</TableHead>
               <TableHead className="text-right">{t("users.actions")}</TableHead>
             </TableRow>
           </TableHeader>
@@ -177,7 +178,7 @@ export default function PatientsPage() {
                     <div>
                       <div className="font-medium">{patient.name}</div>
                       <div className="text-sm text-muted-foreground">
-                        {patient.age} years • {patient.gender}
+                        {patient.age} {t("patients.years")} • {patient.gender}
                       </div>
                     </div>
                   </div>
@@ -206,11 +207,11 @@ export default function PatientsPage() {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
                         <Stethoscope className="mr-2 h-4 w-4" />
-                        <span>Add Diagnosis</span>
+                        <span>{t("other.AddDiagnosis")}</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <FileText className="mr-2 h-4 w-4" />
-                        <span>View Records</span>
+                        <span>{t("other.ViewRecords")}</span>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>{t("common.edit")} Patient</DropdownMenuItem>
@@ -226,7 +227,7 @@ export default function PatientsPage() {
 
       <div className="flex items-center justify-between">
         <div className="text-sm text-muted-foreground">
-          Showing <strong>1-8</strong> of <strong>100</strong> patients
+          {t("other.Showing")} <strong>1-8</strong> {t("other.of")} <strong>100</strong> {t("common .patients")}
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="icon">
@@ -244,20 +245,28 @@ export default function PatientsPage() {
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const getStatusProps = (status: string) => {
+ const getStatusProps = (status: string) => {
     switch (status) {
       case "Active":
+      case "Faol":
+      case "Активные":
         return { variant: "outline" as const, className: "border-blue-500 text-blue-500" }
       case "Critical":
+      case "Og'ir ahvoldagi":
+      case "Критические":
         return { variant: "destructive" as const }
       case "Stable":
+      case "Barqaror":
+      case "Стабильный":
         return { variant: "outline" as const, className: "border-green-500 text-green-500" }
       case "Recovering":
+      case "Tuzalayotgan":
+      case "Выздоравливающие":
         return { variant: "outline" as const, className: "border-yellow-500 text-yellow-500" }
       default:
         return { variant: "secondary" as const }
     }
-  }
+}
 
   const { variant, className } = getStatusProps(status)
 
