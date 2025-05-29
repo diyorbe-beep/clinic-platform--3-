@@ -279,6 +279,7 @@ export const en = {
     BloodPressureMonitoring: "Blood Pressure Monitoring",
     CompleteBlood: "Complete Blood Count (CBC)",
     LipidPanel: "Lipid Panel",
+    ThyroidFunctionTest: "Thyroid Function Test";
     CholesterolLevels: "Cholesterol levels slightly elevated. Recommend dietary changes.",
     NormalResultsNo: "Normal results. No significant abnormalities detected.", 
     ByCheck: "By checking this box, you agree to our privacy policy regarding the handling of yourmedical information."

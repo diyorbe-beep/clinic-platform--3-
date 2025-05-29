@@ -285,6 +285,7 @@ export const uz = {
     CompleteBlood: "To'liq qon miqdori (CBC)",
     LipidPanel: "Lipid paneli",
     CholesterolLevels: "Xolesterin darajasi biroz ko'tariladi. Ratsiondagi o'zgarishlarni tavsiya eting.",
+    ThyroidFunctionTest: "Qalqonsimon bez funktsiyasi testi",
     NormalResultsNo: "Oddiy natijalar. Muhim anomaliyalar aniqlanmadi.", 
     StandardHypertension: "Gipertenziyani boshqarish uchun standart protokol",
     SearchAndSelect: "Davolash rejasini qo'shish uchun bemorni qidiring va tanlang",

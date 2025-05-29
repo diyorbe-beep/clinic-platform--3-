@@ -78,7 +78,7 @@ export default function LabResultsPage() {
       status: "Completed",
       doctor: "Dr. Smith",
       fileUrl: "#",
-      notes: "Cholesterol levels slightly elevated. Recommend dietary changes.",
+      notes: t("other.CholesterolLevels"),
     },
     {
       id: "L003",
