@@ -44,14 +44,14 @@ export default function LabResultsPage() {
       id: "P002",
       name: "Sarah Johnson",
       age: 32,
-      gender: "Female",
+      gender: t("other.Female"),
       avatar: "/placeholder.svg?height=40&width=40",
     },
     {
       id: "P003",
       name: "Michael Brown",
       age: 58,
-      gender: "Male",
+      gender: t("other.Male"),
       avatar: "/placeholder.svg?height=40&width=40",
     },
   ]
@@ -61,18 +61,18 @@ export default function LabResultsPage() {
     {
       id: "L001",
       patientId: "P001",
-      testName: "Complete Blood Count (CBC)",
+      testName: t("other.CompleteBlood"),
       date: "2023-05-10",
       resultDate: "2023-05-12",
       status: "Completed",
       doctor: "Dr. Smith",
       fileUrl: "#",
-      notes: "Normal results. No significant abnormalities detected.",
+      notes: t("other.NormalResultsNo")
     },
     {
       id: "L002",
       patientId: "P001",
-      testName: "Lipid Panel",
+      testName: t("other.LipidPanel"),
       date: "2023-05-10",
       resultDate: "2023-05-12",
       status: "Completed",
@@ -158,27 +158,27 @@ export default function LabResultsPage() {
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold tracking-tight">Lab Results</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("common.labResults")}</h2>
       </div>
 
       <Tabs defaultValue="view-results" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="view-results">View Results</TabsTrigger>
-          <TabsTrigger value="upload-results">Upload Results</TabsTrigger>
+          <TabsTrigger value="view-results">{t("labResults.viewResults")}</TabsTrigger>
+          <TabsTrigger value="upload-results">{t("labResults.uploadResults")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="view-results" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Lab Results</CardTitle>
-              <CardDescription>View and manage patient lab results</CardDescription>
+              <CardTitle>{t("common.labResults")}</CardTitle>
+              <CardDescription>{t("labResults.manageResults")}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-center gap-2 md:w-1/3">
                   <div className="relative w-full">
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input type="search" placeholder="Search lab results..." className="w-full pl-8" />
+                    <Input type="search" placeholder={t("labResults.searchPatients")} className="w-full pl-8" />
                   </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
@@ -190,7 +190,7 @@ export default function LabResultsPage() {
                       <SelectValue placeholder="Filter by patient" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Patients</SelectItem>
+                      <SelectItem value="all">{t("other.AllPatients")}</SelectItem>
                       {patients.map((patient) => (
                         <SelectItem key={patient.id} value={patient.id}>
                           {patient.name}
@@ -199,13 +199,13 @@ export default function LabResultsPage() {
                     </SelectContent>
                   </Select>
                   <Button variant="outline" size="sm">
-                    All Results
+                    {t("labResults.allResults")}
                   </Button>
                   <Button variant="outline" size="sm">
-                    Completed
+                    {t("schedule.completed")}
                   </Button>
                   <Button variant="outline" size="sm">
-                    Pending
+                    {t("schedule.pending")}
                   </Button>
                 </div>
               </div>
@@ -214,13 +214,13 @@ export default function LabResultsPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Patient</TableHead>
-                      <TableHead>Test</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Doctor</TableHead>
-                      <TableHead>Notes</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
+                      <TableHead>{t("schedule.time")}</TableHead>
+                      <TableHead>{t("schedule.patient")}</TableHead>
+                      <TableHead>{t("labResults.date")}</TableHead>
+                      <TableHead>{t("labResults.status")}</TableHead>
+                      <TableHead>{t("labResults.doctor")}</TableHead>
+                      <TableHead>{t("labResults.notes")}</TableHead>
+                      <TableHead className="text-right">{t("labResults.actions")}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -242,7 +242,7 @@ export default function LabResultsPage() {
                             <div className="flex flex-col">
                               <span>Ordered: {result.date}</span>
                               {result.resultDate && (
-                                <span className="text-xs text-muted-foreground">Results: {result.resultDate}</span>
+                                <span className="text-xs text-muted-foreground">{t("labResults.results")}: {result.resultDate}</span>
                               )}
                             </div>
                           </TableCell>
@@ -312,7 +312,7 @@ export default function LabResultsPage() {
                       <div>
                         <div className="font-medium">{patient.name}</div>
                         <div className="text-sm text-muted-foreground">
-                          {patient.age} {t("common.years")} • {patient.gender} • ID: {patient.id}
+                          {patient.age} {t("patients.years")} • {patient.gender} • ID: {patient.id}
                         </div>
                       </div>
                     </div>

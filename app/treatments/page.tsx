@@ -20,93 +20,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "@/contexts/language-context"
 import { useLanguageChange } from "@/hooks/use-language-change"
 // Sample patient data
-const patients = [
-  {
-    id: "P001",
-    name: "John Doe",
-    age: 45,
-    gender: "Male",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "P002",
-    name: "Sarah Johnson",
-    age: 32,
-    gender: "Female",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "P003",
-    name: "Michael Brown",
-    age: 58,
-    gender: "Male",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-]
 
-// Sample treatment templates
-const treatmentTemplates = [
-  {
-    id: "T001",
-    name: "Hypertension Management",
-    description: "Standard protocol for managing hypertension",
-    medications: [
-      { name: "Lisinopril", dosage: "10mg", frequency: "Once daily" },
-      { name: "Hydrochlorothiazide", dosage: "12.5mg", frequency: "Once daily" },
-    ],
-  },
-  {
-    id: "T002",
-    name: "Type 2 Diabetes Management",
-    description: "Protocol for managing Type 2 Diabetes",
-    medications: [
-      { name: "Metformin", dosage: "500mg", frequency: "Twice daily" },
-      { name: "Glipizide", dosage: "5mg", frequency: "Once daily before breakfast" },
-    ],
-  },
-  {
-    id: "T003",
-    name: "Seasonal Allergies",
-    description: "Treatment for seasonal allergic rhinitis",
-    medications: [
-      { name: "Cetirizine", dosage: "10mg", frequency: "Once daily" },
-      { name: "Fluticasone Nasal Spray", dosage: "50mcg", frequency: "1 spray per nostril daily" },
-    ],
-  },
-]
-
-// Sample active treatments
-const activePatientTreatments = [
-  {
-    id: "PT001",
-    patientId: "P001",
-    treatmentName: "Hypertension Management",
-    startDate: "2023-05-01",
-    endDate: "2023-08-01",
-    status: "Active",
-    medications: [
-      { name: "Lisinopril", dosage: "10mg", frequency: "Once daily" },
-      { name: "Hydrochlorothiazide", dosage: "12.5mg", frequency: "Once daily" },
-    ],
-    doctor: "Dr. Smith",
-  },
-  {
-    id: "PT002",
-    patientId: "P003",
-    treatmentName: "Type 2 Diabetes Management",
-    startDate: "2023-04-15",
-    endDate: "2023-07-15",
-    status: "Active",
-    medications: [
-      { name: "Metformin", dosage: "500mg", frequency: "Twice daily" },
-      { name: "Glipizide", dosage: "5mg", frequency: "Once daily before breakfast" },
-    ],
-    doctor: "Dr. Johnson",
-  },
-]
 
 export default function TreatmentsPage() {
-    const { t } = useLanguage()
+  const { t } = useLanguage()
   useLanguageChange()
   const { toast } = useToast()
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null)
@@ -117,6 +34,92 @@ export default function TreatmentsPage() {
   const [medications, setMedications] = useState<Array<{ name: string; dosage: string; frequency: string }>>([
     { name: "", dosage: "", frequency: "" },
   ])
+
+
+  const patients = [
+    {
+      id: "P001",
+      name: "John Doe",
+      age: 45,
+      gender: t("other.Male"),
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+    {
+      id: "P002",
+      name: "Sarah Johnson",
+      age: 32,
+      gender: t("other.Female"),
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+    {
+      id: "P003",
+      name: "Michael Brown",
+      age: 58,
+      gender: t("other.Male"),
+      avatar: "/placeholder.svg?height=40&width=40",
+    },
+  ]
+
+  // Sample treatment templates
+  const treatmentTemplates = [
+    {
+      id: "T001",
+      name: t("other.HypertensionManagement"),
+      description: t("other.StandardHypertension"),
+      medications: [
+        { name: "Lisinopril", dosage: "10mg", frequency: "Once daily" },
+        { name: "Hydrochlorothiazide", dosage: "12.5mg", frequency: "Once daily" },
+      ],
+    },
+    {
+      id: "T002",
+      name: t("other.TypeManagement"),
+      description: t("other.ProtocolDiabetes"),
+      medications: [
+        { name: "Metformin", dosage: "500mg", frequency: "Twice daily" },
+        { name: "Glipizide", dosage: "5mg", frequency: "Once daily before breakfast" },
+      ],
+    },
+    {
+      id: "T003",
+      name: t("other.SeasonalAllergies"),
+      description: t("other.TreatmentForSeasonal"),
+      medications: [
+        { name: "Cetirizine", dosage: "10mg", frequency: "Once daily" },
+        { name: "Fluticasone Nasal Spray", dosage: "50mcg", frequency: "1 spray per nostril daily" },
+      ],
+    },
+  ]
+
+  // Sample active treatments
+  const activePatientTreatments = [
+    {
+      id: "PT001",
+      patientId: "P001",
+      treatmentName: t("other.HypertensionManagement"),
+      startDate: "2023-05-01",
+      endDate: "2023-08-01",
+      status: t("common.active"),
+      medications: [
+        { name: "Lisinopril", dosage: "10mg", frequency: "Once daily" },
+        { name: "Hydrochlorothiazide", dosage: "12.5mg", frequency: "Once daily" },
+      ],
+      doctor: "Dr. Smith",
+    },
+    {
+      id: "PT002",
+      patientId: "P003",
+      treatmentName: t("other.TypeManagement"),
+      startDate: "2023-04-15",
+      endDate: "2023-07-15",
+      status: t("common.active"),
+      medications: [
+        { name: "Metformin", dosage: "500mg", frequency: "Twice daily" },
+        { name: "Glipizide", dosage: "5mg", frequency: "Once daily before breakfast" },
+      ],
+      doctor: "Dr. Johnson",
+    },
+  ]
 
   const handleAddMedication = () => {
     setMedications([...medications, { name: "", dosage: "", frequency: "" }])
@@ -165,35 +168,34 @@ export default function TreatmentsPage() {
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold tracking-tight">Treatments & Medications</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("other.TreatmentsMedications")}</h2>
       </div>
 
       <Tabs defaultValue="add-treatment" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="add-treatment">Add Treatment</TabsTrigger>
-          <TabsTrigger value="active-treatments">Active Treatments</TabsTrigger>
+          <TabsTrigger value="add-treatment">{t("other.AddTreatment")}</TabsTrigger>
+          <TabsTrigger value="active-treatments">{t("other.ActiveTreatments")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="add-treatment" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Select Patient</CardTitle>
-                <CardDescription>Search and select a patient to add a treatment plan</CardDescription>
+                <CardTitle>{t("diagnosis.selectPatient")}</CardTitle>
+                <CardDescription>{t("other.SearchAndSelect")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="relative mb-4">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input type="search" placeholder="Search patients..." className="pl-8" />
+                  <Input type="search" placeholder={t("other.SearchPatients")} className="pl-8" />
                 </div>
 
                 <div className="space-y-2">
                   {patients.map((patient) => (
                     <div
                       key={patient.id}
-                      className={`flex items-center gap-3 p-2 rounded-md cursor-pointer ${
-                        selectedPatient === patient.id ? "bg-primary/10 border border-primary/20" : "hover:bg-muted"
-                      }`}
+                      className={`flex items-center gap-3 p-2 rounded-md cursor-pointer ${selectedPatient === patient.id ? "bg-primary/10 border border-primary/20" : "hover:bg-muted"
+                        }`}
                       onClick={() => setSelectedPatient(patient.id)}
                     >
                       <Avatar>
@@ -214,25 +216,24 @@ export default function TreatmentsPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Treatment Templates</CardTitle>
-                <CardDescription>Select a template or create a custom treatment plan</CardDescription>
+                <CardTitle>{t("treatments.treatmentTemplates")}</CardTitle>
+                <CardDescription>{t("treatments.treatmentTemplates")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   {treatmentTemplates.map((template) => (
                     <div
                       key={template.id}
-                      className={`p-3 rounded-md cursor-pointer ${
-                        selectedTemplate === template.id
-                          ? "bg-primary/10 border border-primary/20"
-                          : "border hover:bg-muted"
-                      }`}
+                      className={`p-3 rounded-md cursor-pointer ${selectedTemplate === template.id
+                        ? "bg-primary/10 border border-primary/20"
+                        : "border hover:bg-muted"
+                        }`}
                       onClick={() => handleTemplateSelect(template.id)}
                     >
                       <div className="font-medium">{template.name}</div>
                       <div className="text-sm text-muted-foreground">{template.description}</div>
                       <div className="mt-2 text-xs">
-                        <span className="font-medium">Medications: </span>
+                        <span className="font-medium">{t("treatments.medication")}: </span>
                         {template.medications.map((med) => med.name).join(", ")}
                       </div>
                     </div>
@@ -244,7 +245,7 @@ export default function TreatmentsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Treatment Plan Details</CardTitle>
+              <CardTitle>{t("treatments.treatmentPlanDetails")}</CardTitle>
               <CardDescription>
                 {selectedTemplate
                   ? `Using template: ${treatmentTemplates.find((t) => t.id === selectedTemplate)?.name}`
@@ -255,16 +256,15 @@ export default function TreatmentsPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="startDate">Start Date</Label>
+                    <Label htmlFor="startDate">{t("treatments.startDate")}</Label>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={`w-full justify-start text-left font-normal ${
-                            !startDate ? "text-muted-foreground" : ""
-                          }`}
+                          className={`w-full justify-start text-left font-normal ${!startDate ? "text-muted-foreground" : ""
+                            }`}
                         >
-                          {startDate ? format(startDate, "PPP") : <span>Pick a date</span>}
+                          {startDate ? format(startDate, "PPP") : <span>{t("labResults.pickDate")}</span>}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                       </PopoverTrigger>
@@ -275,16 +275,15 @@ export default function TreatmentsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="endDate">End Date (Optional)</Label>
+                    <Label htmlFor="endDate">{t("treatments.endDate")}</Label>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={`w-full justify-start text-left font-normal ${
-                            !endDate ? "text-muted-foreground" : ""
-                          }`}
+                          className={`w-full justify-start text-left font-normal ${!endDate ? "text-muted-foreground" : ""
+                            }`}
                         >
-                          {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
+                          {endDate ? format(endDate, "PPP") : <span>{t("labResults.pickDate")}</span>}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                       </PopoverTrigger>
@@ -302,7 +301,7 @@ export default function TreatmentsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="treatmentDescription">Treatment Description</Label>
+                  <Label htmlFor="treatmentDescription">{t("treatments.treatmentDescription")}</Label>
                   <Textarea
                     id="treatmentDescription"
                     placeholder="Enter detailed description of the treatment plan"
@@ -314,17 +313,17 @@ export default function TreatmentsPage() {
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label>Medications</Label>
+                    <Label>{t("treatments.medication")}</Label>
                     <Button type="button" variant="outline" size="sm" onClick={handleAddMedication}>
                       <Plus className="mr-1 h-3 w-3" />
-                      Add Medication
+                      {t("treatments.addMedication")}
                     </Button>
                   </div>
 
                   {medications.map((medication, index) => (
                     <div key={index} className="grid gap-2 md:grid-cols-3 border p-3 rounded-md">
                       <div className="space-y-1">
-                        <Label htmlFor={`medication-${index}`}>Medication</Label>
+                        <Label htmlFor={`medication-${index}`}>{t("treatments.medication")}</Label>
                         <Input
                           id={`medication-${index}`}
                           placeholder="Medication name"
@@ -333,7 +332,7 @@ export default function TreatmentsPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <Label htmlFor={`dosage-${index}`}>Dosage</Label>
+                        <Label htmlFor={`dosage-${index}`}>{t("treatments.dosage")}</Label>
                         <Input
                           id={`dosage-${index}`}
                           placeholder="e.g., 10mg"
@@ -342,7 +341,7 @@ export default function TreatmentsPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <Label htmlFor={`frequency-${index}`}>Frequency</Label>
+                        <Label htmlFor={`frequency-${index}`}>{t("treatments.frequency")}</Label>
                         <Input
                           id={`frequency-${index}`}
                           placeholder="e.g., Twice daily"
@@ -355,7 +354,7 @@ export default function TreatmentsPage() {
                 </div>
 
                 <Button type="submit" className="w-full" disabled={!selectedPatient || !startDate || !customTreatment}>
-                  Add Treatment Plan
+                  {t("treatments.addTreatmentPlan")}
                 </Button>
               </form>
             </CardContent>
@@ -365,18 +364,18 @@ export default function TreatmentsPage() {
         <TabsContent value="active-treatments" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Active Treatment Plans</CardTitle>
-              <CardDescription>View and manage active treatment plans for all patients</CardDescription>
+              <CardTitle>{t("treatments.activeTreatments")}</CardTitle>
+              <CardDescription>{t("treatments.manageTreatments")}</CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Patient</TableHead>
-                    <TableHead>Treatment</TableHead>
-                    <TableHead>Duration</TableHead>
-                    <TableHead>Medications</TableHead>
-                    <TableHead>Doctor</TableHead>
+                    <TableHead>{t("patients.patient")}</TableHead>
+                    <TableHead>{t("schedule.treatment")}</TableHead>
+                    <TableHead>{t("treatments.duration")}</TableHead>
+                    <TableHead>{t("treatments.medications")}</TableHead>
+                    <TableHead>{t("diagnosis.doctor")}</TableHead>
                     <TableHead>Status</TableHead>
                   </TableRow>
                 </TableHeader>

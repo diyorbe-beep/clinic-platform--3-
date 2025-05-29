@@ -141,6 +141,7 @@ export const ru = {
   },
   schedule: {
     calendar: "Календарь",
+    SelectNurse: "Выбрать медсестру",
     selectDate: "Выберите дату для просмотра расписания",
     filter: "Фильтр",
     filterByNurse: "Фильтровать расписание по медсестре",
@@ -269,5 +270,19 @@ export const ru = {
     RhinitisPrescribed: "Ринит и зуд глаз. Прописали антигистаминные препараты.",
     HbA1cLevels: "Уровень HbA1c 7,2%. Подробнее о диагнозе и лечении можно узнать здесь",
     SearchPatients: "Поиск пациентов...",
+    TreatmentsMedications: "Лечение и лекарства",
+    AddTreatment: "Добавить лечение",
+    ActiveTreatments: "Активные методы лечения",
+    HypertensionManagement: "Лечение гипертонии",
+    StandardHypertension: "Стандартный протокол лечения гипертонии",
+    TypeManagement: "Лечение диабета 2 типа",
+    ProtocolDiabetes: "ProtocolDiabetes",
+    TreatmentForSeasonal: "Лечение сезонного аллергического ринита",
+    BloodPressureMonitoring: "Мониторинг артериального давления",
+    CompleteBlood: "Общий анализ крови (ОАК)",
+    LipidPanel: "Липидная панель",
+    CholesterolLevels: "Уровень холестерина слегка повышен. Рекомендовать изменение диеты.",
+    NormalResultsNo: "Нормальные результаты. Существенных отклонений не обнаружено.", 
+    SearchAndSelect: "Найдите и выберите пациента, чтобы добавить план лечения"
   }
 }

@@ -138,6 +138,7 @@ export const en = {
     to: "to",
   },
   schedule: {
+    SelectNurse: "Select nurse",
     calendar: "Calendar",
     selectDate: "Select a date to view the schedule",
     filter: "Filter",
@@ -266,6 +267,20 @@ export const en = {
     SeasonalAllergies: "Seasonal Allergies",
     RhinitisPrescribed: "Rhinitis and itchy eyes. Prescribed antihistamines.",
     SearchPatients: "Search Patients...",
+    TreatmentsMedications: "Treatments & Medications",
+    AddTreatment: "Add Treatment",
+    ActiveTreatments: "Active Treatments",
+    SearchAndSecelt: "Search and select a patient to add a treatment plan",
+    HypertensionManagement: "Hypertension Management",
+    StandardHypertension: "Standard protocol for managing hypertension",
+    TypeManagement: "Type 2 Diabetes Management",
+    ProtocolDiabetes: "Treatment protocol for type 2 diabetes",
+    TreatmentForSeasonal: "Treatment for seasonal allergic rhinitis",
+    BloodPressureMonitoring: "Blood Pressure Monitoring",
+    CompleteBlood: "Complete Blood Count (CBC)",
+    LipidPanel: "Lipid Panel",
+    CholesterolLevels: "Cholesterol levels slightly elevated. Recommend dietary changes.",
+    NormalResultsNo: "Normal results. No significant abnormalities detected.", 
     ByCheck: "By checking this box, you agree to our privacy policy regarding the handling of yourmedical information."
   }
 }

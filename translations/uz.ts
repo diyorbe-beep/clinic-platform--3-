@@ -146,6 +146,7 @@ export const uz = {
   },
   schedule: {
     calendar: "Kalendar",
+    SelectNurse: "Hmashina tanlash",
     selectDate: "Jadvalni ko'rish uchun sanani tanlang",
     filter: "Filtr",
     filterByNurse: "Hamshira bo'yicha filtrlash",
@@ -273,6 +274,20 @@ export const uz = {
     SeasonalAllergies: "Sezonli allergiyalar",
     RhinitisPrescribed: "Rinit va ko'zlarning qichishi. Belgilangan antigistaminlar.",
     SearchPatients: "Bemorlarni qidirish...",
+    TreatmentsMedications: "Davolash usullari va dorilar",
+    AddTreatment: "Davolashni qo'shish",
+    ActiveTreatments: "Faol muolajalar",
+    HypertensionManagement: "Gipertenziyani boshqarish",
+    TypeManagement: "2-toifa diabetni davolash",
+    ProtocolDiabetes: "2-toifa diabetni davolash protokoli",
+    TreatmentForSeasonal: "Mavsumiy allergik rinitni davolash",
+    BloodPressureMonitoring: "Qon bosimi monitoringi",
+    CompleteBlood: "To'liq qon miqdori (CBC)",
+    LipidPanel: "Lipid paneli",
+    CholesterolLevels: "Xolesterin darajasi biroz ko'tariladi. Ratsiondagi o'zgarishlarni tavsiya eting.",
+    NormalResultsNo: "Oddiy natijalar. Muhim anomaliyalar aniqlanmadi.", 
+    StandardHypertension: "Gipertenziyani boshqarish uchun standart protokol",
+    SearchAndSelect: "Davolash rejasini qo'shish uchun bemorni qidiring va tanlang",
     RegisterPatient: "Tizimda yangi bemorni ro'yxatdan o'tkazing. * bilan belgilangan barcha maydonlar talab qilinadi.",
   }
 }

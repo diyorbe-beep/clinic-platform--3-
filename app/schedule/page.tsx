@@ -11,6 +11,8 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { format, addDays } from "date-fns"
 import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/language-context"
+import { useLanguageChange } from "@/hooks/use-language-change"
 
 // Sample nurse data
 const nurses = [
@@ -44,7 +46,7 @@ const generateScheduleData = () => {
       time: "09:00 AM",
       date: format(today, "yyyy-MM-dd"),
       nurseId: "N001",
-      status: "Pending",
+      status: t("schedule.pending"),
       notes: "Check blood pressure and record readings",
     },
     {
@@ -123,11 +125,103 @@ const generateScheduleData = () => {
 }
 
 export default function SchedulePage() {
+  const { t } = useLanguage()
+  useLanguageChange()
   const { toast } = useToast()
+
+  const generateScheduleData = () => {
+    const today = new Date()
+    return [
+      {
+        id: "S001",
+        patientId: "P001",
+        patientName: "John Doe",
+        patientAvatar: "/placeholder.svg?height=40&width=40",
+        treatmentName: t("other.BloodPressureMonitoring"),
+        time: "09:00 AM",
+        date: format(today, "yyyy-MM-dd"),
+        nurseId: "N001",
+        status: t("schedule.pending"),
+        notes: "Check blood pressure and record readings",
+      },
+      {
+        id: "S002",
+        patientId: "P002",
+        patientName: "Sarah Johnson",
+        patientAvatar: "/placeholder.svg?height=40&width=40",
+        treatmentName: "Medication Administration",
+        time: "10:30 AM",
+        date: format(today, "yyyy-MM-dd"),
+        nurseId: "N001",
+        status: t("schedule.completed"),
+        notes: "Administer insulin injection",
+      },
+      {
+        id: "S003",
+        patientId: "P003",
+        patientName: "Michael Brown",
+        patientAvatar: "/placeholder.svg?height=40&width=40",
+        treatmentName: "Wound Dressing",
+        time: "11:45 AM",
+        date: format(today, "yyyy-MM-dd"),
+        nurseId: "N002",
+        status: t("schedule.pending"),
+        notes: "Change dressing on surgical wound",
+      },
+      {
+        id: "S004",
+        patientId: "P004",
+        patientName: "Emily Wilson",
+        patientAvatar: "/placeholder.svg?height=40&width=40",
+        treatmentName: "IV Therapy",
+        time: "02:15 PM",
+        date: format(today, "yyyy-MM-dd"),
+        nurseId: "N003",
+        status: t("schedule.pending"),
+        notes: "Administer IV antibiotics",
+      },
+      {
+        id: "S005",
+        patientId: "P005",
+        patientName: "Robert Garcia",
+        patientAvatar: "/placeholder.svg?height=40&width=40",
+        treatmentName: "Physical Assessment",
+        time: "03:30 PM",
+        date: format(today, "yyyy-MM-dd"),
+        nurseId: "N002",
+        status: t("schedule.pending"),
+        notes: "Complete full physical assessment",
+      },
+      {
+        id: "S006",
+        patientId: "P001",
+        patientName: "John Doe",
+        patientAvatar: "/placeholder.svg?height=40&width=40",
+        treatmentName:t("other.BloodPressureMonitoring"),
+        time: "09:00 AM",
+        date: format(addDays(today, 1), "yyyy-MM-dd"),
+        nurseId: "N001",
+        status: t("schedule.pending"),
+        notes: "Check blood pressure and record readings",
+      },
+      {
+        id: "S007",
+        patientId: "P003",
+        patientName: "Michael Brown",
+        patientAvatar: "/placeholder.svg?height=40&width=40",
+        treatmentName: "Wound Dressing",
+        time: "11:45 AM",
+        date: format(addDays(today, 1), "yyyy-MM-dd"),
+        nurseId: "N002",
+        status: t("schedule.pending"),
+        notes: "Change dressing on surgical wound",
+      },
+    ]
+  }
+
   const [date, setDate] = useState<Date>(new Date())
   const [selectedNurse, setSelectedNurse] = useState<string>("all")
   const [scheduleData, setScheduleData] = useState(generateScheduleData())
-
   const filteredSchedule = scheduleData.filter((item) => {
     const dateMatches = item.date === format(date, "yyyy-MM-dd")
     const nurseMatches = selectedNurse === "all" || item.nurseId === selectedNurse
@@ -154,15 +248,15 @@ export default function SchedulePage() {
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold tracking-tight">Nurse Schedule</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("common.nurseSchedule")}</h2>
       </div>
 
       <div className="grid gap-4 md:grid-cols-[300px_1fr]">
         <div className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Calendar</CardTitle>
-              <CardDescription>Select a date to view the schedule</CardDescription>
+              <CardTitle>{t("schedule.calendar")}</CardTitle>
+              <CardDescription>{t("schedule.selectDate")}</CardDescription>
             </CardHeader>
             <CardContent>
               <Calendar
@@ -176,16 +270,16 @@ export default function SchedulePage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Filter</CardTitle>
-              <CardDescription>Filter schedule by nurse</CardDescription>
+              <CardTitle>{t("schedule.filter")}</CardTitle>
+              <CardDescription>{t("schedule.filterByNurse")}</CardDescription>
             </CardHeader>
             <CardContent>
               <Select value={selectedNurse} onValueChange={setSelectedNurse}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select nurse" />
+                  <SelectValue placeholder={t("schedule.SelectNurse")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Nurses</SelectItem>
+                  <SelectItem value="all">{t("schedule.allNurses")}</SelectItem>
                   {nurses.map((nurse) => (
                     <SelectItem key={nurse.id} value={nurse.id}>
                       {nurse.name}
@@ -212,7 +306,7 @@ export default function SchedulePage() {
         <div>
           <Card>
             <CardHeader>
-              <CardTitle>Treatment Schedule</CardTitle>
+              <CardTitle>{t("schedule.treatmentSchedule")}</CardTitle>
               <CardDescription>
                 Schedule for {format(date, "MMMM d, yyyy")}
                 {selectedNurse !== "all" && ` • ${nurses.find((n) => n.id === selectedNurse)?.name}`}
@@ -221,19 +315,19 @@ export default function SchedulePage() {
             <CardContent>
               {filteredSchedule.length === 0 ? (
                 <div className="flex items-center justify-center h-40 border rounded-md">
-                  <p className="text-muted-foreground">No treatments scheduled for this date</p>
+                  <p className="text-muted-foreground">{t("schedule.noTreatments")}</p>
                 </div>
               ) : (
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Time</TableHead>
-                      <TableHead>Patient</TableHead>
-                      <TableHead>Treatment</TableHead>
-                      <TableHead>Nurse</TableHead>
-                      <TableHead>Notes</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Action</TableHead>
+                      <TableHead>{t("schedule.time")}</TableHead>
+                      <TableHead>{t("schedule.patient")}</TableHead>
+                      <TableHead>{t("schedule.treatment")}</TableHead>
+                      <TableHead>{t("schedule.nurse")}</TableHead>
+                      <TableHead>{t("schedule.notes")}</TableHead>
+                      <TableHead>{t("schedule.status")}</TableHead>
+                      <TableHead>{t("schedule.action")}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -274,7 +368,7 @@ export default function SchedulePage() {
                               checked={schedule.status === "Completed"}
                               onCheckedChange={(checked) => handleStatusChange(schedule.id, checked as boolean)}
                             />
-                            <Label htmlFor={`complete-${schedule.id}`}>Mark Complete</Label>
+                            <Label htmlFor={`complete-${schedule.id}`}>{t("schedule.markComplete")}</Label>
                           </div>
                         </TableCell>
                       </TableRow>
