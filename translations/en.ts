@@ -279,9 +279,25 @@ export const en = {
     BloodPressureMonitoring: "Blood Pressure Monitoring",
     CompleteBlood: "Complete Blood Count (CBC)",
     LipidPanel: "Lipid Panel",
-    ThyroidFunctionTest: "Thyroid Function Test";
+    ThyroidFunctionTest: "Thyroid Function Test",
+    MedicationAdministration: "Medication Administration",
+    WoundDressing: "Wound Dressing",
+    IVTherapy: "IV Therapy",
+    PhysicalAssessment: "Physical Assessment",
     CholesterolLevels: "Cholesterol levels slightly elevated. Recommend dietary changes.",
     NormalResultsNo: "Normal results. No significant abnormalities detected.", 
+    CheckBlood: "Check blood pressure and record readings",
+    AdministerInsulin: "Administer insulin injection",
+    ChangeDressing: "Change dressing on surgical wound",
+    AdministerIVAntibiotics: "Administer IV antibiotics",
+    CompleteFullPhysical: "Complete full physical assessment",
+    TSHLevels: "TSH levels within normal range.", 
+    ComprehensiveMetabolicPanel: "Comprehensive Metabolic Panel",
+    AwaitingLaboratory: "Awaiting results from the laboratory",
+    HemoglobinA1C: "Hemoglobin A1C",
+    SearchResults: "Search and select a patient to upload lab results",
+    HbA1cControl: "HbA1c at 7.2%. Indicates need for better glucose control.",
+    OrDragAndDrop: "or drag and drop",
     ByCheck: "By checking this box, you agree to our privacy policy regarding the handling of yourmedical information."
   }
 }

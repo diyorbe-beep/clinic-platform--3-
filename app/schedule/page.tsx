@@ -33,102 +33,12 @@ const nurses = [
   },
 ]
 
-// Sample schedule data
-const generateScheduleData = () => {
-  const today = new Date()
-  return [
-    {
-      id: "S001",
-      patientId: "P001",
-      patientName: "John Doe",
-      patientAvatar: "/placeholder.svg?height=40&width=40",
-      treatmentName: "Blood Pressure Monitoring",
-      time: "09:00 AM",
-      date: format(today, "yyyy-MM-dd"),
-      nurseId: "N001",
-      status: t("schedule.pending"),
-      notes: "Check blood pressure and record readings",
-    },
-    {
-      id: "S002",
-      patientId: "P002",
-      patientName: "Sarah Johnson",
-      patientAvatar: "/placeholder.svg?height=40&width=40",
-      treatmentName: "Medication Administration",
-      time: "10:30 AM",
-      date: format(today, "yyyy-MM-dd"),
-      nurseId: "N001",
-      status: "Completed",
-      notes: "Administer insulin injection",
-    },
-    {
-      id: "S003",
-      patientId: "P003",
-      patientName: "Michael Brown",
-      patientAvatar: "/placeholder.svg?height=40&width=40",
-      treatmentName: "Wound Dressing",
-      time: "11:45 AM",
-      date: format(today, "yyyy-MM-dd"),
-      nurseId: "N002",
-      status: "Pending",
-      notes: "Change dressing on surgical wound",
-    },
-    {
-      id: "S004",
-      patientId: "P004",
-      patientName: "Emily Wilson",
-      patientAvatar: "/placeholder.svg?height=40&width=40",
-      treatmentName: "IV Therapy",
-      time: "02:15 PM",
-      date: format(today, "yyyy-MM-dd"),
-      nurseId: "N003",
-      status: "Pending",
-      notes: "Administer IV antibiotics",
-    },
-    {
-      id: "S005",
-      patientId: "P005",
-      patientName: "Robert Garcia",
-      patientAvatar: "/placeholder.svg?height=40&width=40",
-      treatmentName: "Physical Assessment",
-      time: "03:30 PM",
-      date: format(today, "yyyy-MM-dd"),
-      nurseId: "N002",
-      status: "Pending",
-      notes: "Complete full physical assessment",
-    },
-    {
-      id: "S006",
-      patientId: "P001",
-      patientName: "John Doe",
-      patientAvatar: "/placeholder.svg?height=40&width=40",
-      treatmentName: "Blood Pressure Monitoring",
-      time: "09:00 AM",
-      date: format(addDays(today, 1), "yyyy-MM-dd"),
-      nurseId: "N001",
-      status: "Pending",
-      notes: "Check blood pressure and record readings",
-    },
-    {
-      id: "S007",
-      patientId: "P003",
-      patientName: "Michael Brown",
-      patientAvatar: "/placeholder.svg?height=40&width=40",
-      treatmentName: "Wound Dressing",
-      time: "11:45 AM",
-      date: format(addDays(today, 1), "yyyy-MM-dd"),
-      nurseId: "N002",
-      status: "Pending",
-      notes: "Change dressing on surgical wound",
-    },
-  ]
-}
-
 export default function SchedulePage() {
   const { t } = useLanguage()
   useLanguageChange()
   const { toast } = useToast()
 
+  
   const generateScheduleData = () => {
     const today = new Date()
     return [
@@ -142,55 +52,55 @@ export default function SchedulePage() {
         date: format(today, "yyyy-MM-dd"),
         nurseId: "N001",
         status: t("schedule.pending"),
-        notes: "Check blood pressure and record readings",
+        notes: t("other.CheckBlood"),
       },
       {
         id: "S002",
         patientId: "P002",
         patientName: "Sarah Johnson",
         patientAvatar: "/placeholder.svg?height=40&width=40",
-        treatmentName: "Medication Administration",
+        treatmentName: t("other.MedicationAdministration"),
         time: "10:30 AM",
         date: format(today, "yyyy-MM-dd"),
         nurseId: "N001",
         status: t("schedule.completed"),
-        notes: "Administer insulin injection",
+        notes: t("other.AdministerInsulin"),
       },
       {
         id: "S003",
         patientId: "P003",
         patientName: "Michael Brown",
         patientAvatar: "/placeholder.svg?height=40&width=40",
-        treatmentName: "Wound Dressing",
+        treatmentName: t("other.WoundDressing"),
         time: "11:45 AM",
         date: format(today, "yyyy-MM-dd"),
         nurseId: "N002",
         status: t("schedule.pending"),
-        notes: "Change dressing on surgical wound",
+        notes: t("other.ChangeDressing"),
       },
       {
         id: "S004",
         patientId: "P004",
         patientName: "Emily Wilson",
         patientAvatar: "/placeholder.svg?height=40&width=40",
-        treatmentName: "IV Therapy",
+        treatmentName: t("other.IVTherapy"),
         time: "02:15 PM",
         date: format(today, "yyyy-MM-dd"),
         nurseId: "N003",
         status: t("schedule.pending"),
-        notes: "Administer IV antibiotics",
+        notes: t("other.AdministerIVAntibiotics"),
       },
       {
         id: "S005",
         patientId: "P005",
         patientName: "Robert Garcia",
         patientAvatar: "/placeholder.svg?height=40&width=40",
-        treatmentName: "Physical Assessment",
+        treatmentName: t("other.PhysicalAssessment"),
         time: "03:30 PM",
         date: format(today, "yyyy-MM-dd"),
         nurseId: "N002",
         status: t("schedule.pending"),
-        notes: "Complete full physical assessment",
+        notes: t("other.CompleteFullPhysical"),
       },
       {
         id: "S006",
@@ -202,23 +112,25 @@ export default function SchedulePage() {
         date: format(addDays(today, 1), "yyyy-MM-dd"),
         nurseId: "N001",
         status: t("schedule.pending"),
-        notes: "Check blood pressure and record readings",
+        notes: t("other.CheckBlood"),
       },
       {
         id: "S007",
         patientId: "P003",
         patientName: "Michael Brown",
         patientAvatar: "/placeholder.svg?height=40&width=40",
-        treatmentName: "Wound Dressing",
+        treatmentName: t("other.WoundDressing"),
         time: "11:45 AM",
         date: format(addDays(today, 1), "yyyy-MM-dd"),
         nurseId: "N002",
         status: t("schedule.pending"),
-        notes: "Change dressing on surgical wound",
+        notes: t("other.ChangeDressing"),
       },
     ]
   }
 
+
+  
   const [date, setDate] = useState<Date>(new Date())
   const [selectedNurse, setSelectedNurse] = useState<string>("all")
   const [scheduleData, setScheduleData] = useState(generateScheduleData())

@@ -83,35 +83,35 @@ export default function LabResultsPage() {
     {
       id: "L003",
       patientId: "P002",
-      testName: "Thyroid Function Test",
+      testName: t("other.ThyroidFunctionTest"),
       date: "2023-05-15",
       resultDate: "2023-05-17",
       status: "Completed",
       doctor: "Dr. Johnson",
       fileUrl: "#",
-      notes: "TSH levels within normal range.",
+      notes: t("other.TSHLevels"),
     },
     {
       id: "L004",
       patientId: "P003",
-      testName: "Comprehensive Metabolic Panel",
+      testName: t("other.ComprehensiveMetabolicPanel"),
       date: "2023-05-08",
       resultDate: null,
       status: "Pending",
       doctor: "Dr. Wilson",
       fileUrl: null,
-      notes: "Awaiting results from the laboratory.",
+      notes: t("other.AwaitingLaboratory"),
     },
     {
       id: "L005",
       patientId: "P003",
-      testName: "Hemoglobin A1C",
+      testName: t("other.HemoglobinA1C"),
       date: "2023-05-08",
       resultDate: "2023-05-10",
       status: "Completed",
       doctor: "Dr. Wilson",
       fileUrl: "#",
-      notes: "HbA1c at 7.2%. Indicates need for better glucose control.",
+      notes: t("other.HbA1cControl"),
     },
   ]
 
@@ -288,13 +288,13 @@ export default function LabResultsPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Select Patient</CardTitle>
-                <CardDescription>Search and select a patient to upload lab results</CardDescription>
+                <CardTitle>{t("diagnosis.selectPatient")}</CardTitle>
+                <CardDescription>{t("other.SearchResults")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="relative mb-4">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input type="search" placeholder="Search patients..." className="pl-8" />
+                  <Input type="search" placeholder={t("other.SearchPatients")} className="pl-8" />
                 </div>
 
                 <div className="space-y-2">
@@ -323,13 +323,13 @@ export default function LabResultsPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Upload Lab Result</CardTitle>
-                <CardDescription>Upload lab result files (PDF, JPG, PNG)</CardDescription>
+                <CardTitle>{t("labResults.uploadLabResult")}</CardTitle>
+                <CardDescription>{t("labResults.uploadFiles")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="testName">Test Name</Label>
+                    <Label htmlFor="testName">{t("labResults.testName")}</Label>
                     <Input
                       id="testName"
                       placeholder="e.g., Complete Blood Count"
@@ -339,7 +339,7 @@ export default function LabResultsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="date">Test Date</Label>
+                    <Label htmlFor="date">{t("labResults.testDate")}</Label>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
@@ -358,7 +358,7 @@ export default function LabResultsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="notes">Notes</Label>
+                    <Label htmlFor="notes">{t("schedule.notes")}</Label>
                     <Textarea
                       id="notes"
                       placeholder="Enter any notes about the lab result"
@@ -369,7 +369,7 @@ export default function LabResultsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="lab-file">Upload File</Label>
+                    <Label htmlFor="lab-file">{t("labResults.uploadFile")}</Label>
                     <div className="flex items-center justify-center w-full">
                       <label
                         htmlFor="lab-file"
@@ -378,7 +378,7 @@ export default function LabResultsPage() {
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                           <Upload className="w-8 h-8 mb-2 text-muted-foreground" />
                           <p className="mb-2 text-sm text-muted-foreground">
-                            <span className="font-semibold">Click to upload</span> or drag and drop
+                            <span className="font-semibold">{t("labResults.clickToUpload")}</span> {t("other.OrDragAndDrop")}
                           </p>
                           <p className="text-xs text-muted-foreground">PDF, JPG, or PNG (MAX. 10MB)</p>
                         </div>
@@ -407,7 +407,7 @@ export default function LabResultsPage() {
                     className="w-full"
                     disabled={!selectedPatient || !date || !testName || !selectedFile}
                   >
-                    Upload Lab Result
+                    {t("labResults.uploadLabResult")}
                   </Button>
                 </form>
               </CardContent>
