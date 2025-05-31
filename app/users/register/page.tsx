@@ -13,26 +13,33 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronLeft } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/language-context"
+
+
+export default function UserRegistrationPage() {
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { t } = useLanguage()
 
 const formSchema = z
   .object({
     firstName: z.string().min(2, {
-      message: "First name must be at least 2 characters.",
+      message: t("other.firstNameMessage"),
     }),
     lastName: z.string().min(2, {
-      message: "Last name must be at least 2 characters.",
+      message: t("other.lastNameMessage"),
     }),
     email: z.string().email({
-      message: "Please enter a valid email address.",
+      message: t("other.emailMessage"),
     }),
     role: z.string({
-      required_error: "Please select a role.",
+      required_error: t("other.PleaseSelectRole"),
     }),
     department: z.string().min(2, {
-      message: "Department must be at least 2 characters.",
+      message: t("other.DepartmentMessage"),
     }),
     password: z.string().min(8, {
-      message: "Password must be at least 8 characters.",
+      message: t("other.PasswordMessage"),
     }),
     confirmPassword: z.string(),
     sendWelcomeEmail: z.boolean().default(true),
@@ -43,9 +50,6 @@ const formSchema = z
     path: ["confirmPassword"],
   })
 
-export default function UserRegistrationPage() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -96,13 +100,13 @@ export default function UserRegistrationPage() {
             <ChevronLeft className="h-4 w-4" />
           </Button>
         </Link>
-        <h2 className="text-3xl font-bold tracking-tight">Register New User</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("users.userRegistration")}</h2>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>User Information</CardTitle>
-          <CardDescription>Add a new user to the system. All fields marked with * are required.</CardDescription>
+          <CardTitle>{t("users.UserInformation")}</CardTitle>
+          <CardDescription>{t("other.AddNewUser")}</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -114,7 +118,7 @@ export default function UserRegistrationPage() {
                     name="firstName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>First Name *</FormLabel>
+                        <FormLabel>{t("other.FirstName")} *</FormLabel>
                         <FormControl>
                           <Input placeholder="John" {...field} />
                         </FormControl>
@@ -127,7 +131,7 @@ export default function UserRegistrationPage() {
                     name="lastName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Last Name *</FormLabel>
+                        <FormLabel>{t("other.LastName")} *</FormLabel>
                         <FormControl>
                           <Input placeholder="Doe" {...field} />
                         </FormControl>
@@ -142,7 +146,7 @@ export default function UserRegistrationPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email *</FormLabel>
+                      <FormLabel>{t("other.Email")} *</FormLabel>
                       <FormControl>
                         <Input type="email" placeholder="john.doe@example.com" {...field} />
                       </FormControl>
@@ -165,11 +169,11 @@ export default function UserRegistrationPage() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="doctor">Doctor</SelectItem>
-                            <SelectItem value="nurse">Nurse</SelectItem>
-                            <SelectItem value="administrator">Administrator</SelectItem>
-                            <SelectItem value="receptionist">Receptionist</SelectItem>
-                            <SelectItem value="lab_technician">Lab Technician</SelectItem>
+                            <SelectItem value="doctor">{t("labResults.doctor")}</SelectItem>
+                            <SelectItem value="nurse">{t("schedule.nurse")}</SelectItem>
+                            <SelectItem value="administrator">{t("other.administrator")}</SelectItem>
+                            <SelectItem value="receptionist">{t("other.receReceptionistptionist")}</SelectItem>
+                            <SelectItem value="lab_technician">{t("other.LabTechnician")}</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -181,7 +185,7 @@ export default function UserRegistrationPage() {
                     name="department"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Department *</FormLabel>
+                        <FormLabel>{t("users.department")} *</FormLabel>
                         <FormControl>
                           <Input placeholder="Cardiology" {...field} />
                         </FormControl>
@@ -197,11 +201,11 @@ export default function UserRegistrationPage() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password *</FormLabel>
+                        <FormLabel>{t("other.Password")} *</FormLabel>
                         <FormControl>
                           <Input type="password" placeholder="••••••••" {...field} />
                         </FormControl>
-                        <FormDescription>Password must be at least 8 characters long.</FormDescription>
+                        <FormDescription>{t("other.PasswordMessage")}</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -211,7 +215,7 @@ export default function UserRegistrationPage() {
                     name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Confirm Password *</FormLabel>
+                        <FormLabel>{t("other.ConfirmPassword")} *</FormLabel>
                         <FormControl>
                           <Input type="password" placeholder="••••••••" {...field} />
                         </FormControl>
@@ -231,8 +235,8 @@ export default function UserRegistrationPage() {
                           <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                         </FormControl>
                         <div className="space-y-1 leading-none">
-                          <FormLabel>Send welcome email</FormLabel>
-                          <FormDescription>Send an email to the user with their login credentials.</FormDescription>
+                          <FormLabel>{t("other.SendWelcomeEmail")}</FormLabel>
+                          <FormDescription>{t("other.SendAnEmail")}</FormDescription>
                         </div>
                       </FormItem>
                     )}
@@ -247,9 +251,9 @@ export default function UserRegistrationPage() {
                           <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                         </FormControl>
                         <div className="space-y-1 leading-none">
-                          <FormLabel>Require password change on first login</FormLabel>
+                          <FormLabel>{t("other.RequirePassword")}</FormLabel>
                           <FormDescription>
-                            The user will be prompted to change their password when they first log in.
+                            {t("other.TheUserWill")}
                           </FormDescription>
                         </div>
                       </FormItem>
@@ -260,7 +264,7 @@ export default function UserRegistrationPage() {
 
               <div className="flex justify-between pt-4">
                 <Link href="/users">
-                  <Button variant="outline">Cancel</Button>
+                  <Button variant="outline">{t("common.cancel")}</Button>
                 </Link>
                 <Button type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "Registering..." : "Register User"}

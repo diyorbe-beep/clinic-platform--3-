@@ -20,14 +20,20 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
 // Sample user data
+
+
+export default function UsersPage() {
+  const { t } = useLanguage()
+  const [mounted, setMounted] = useState(false)
+
 const users = [
   {
     id: "U001",
     name: "Dr. Jane Smith",
     email: "jane.smith@example.com",
-    role: "Doctor",
+    role: t("labResults.doctor"),
     department: "Cardiology",
-    status: "Active",
+    status: t("common.active"),
     lastLogin: "2023-05-15 09:45 AM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
@@ -35,9 +41,9 @@ const users = [
     id: "U002",
     name: "Dr. Michael Johnson",
     email: "michael.johnson@example.com",
-    role: "Doctor",
+    role: t("labResults.doctor"),
     department: "Neurology",
-    status: "Active",
+    status: t("common.active"),
     lastLogin: "2023-05-14 02:30 PM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
@@ -45,9 +51,9 @@ const users = [
     id: "U003",
     name: "Emily Davis",
     email: "emily.davis@example.com",
-    role: "Nurse",
+    role: t("schedule.nurse"),
     department: "General",
-    status: "Active",
+    status: t("common.active"),
     lastLogin: "2023-05-15 08:15 AM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
@@ -55,9 +61,9 @@ const users = [
     id: "U004",
     name: "Robert Wilson",
     email: "robert.wilson@example.com",
-    role: "Nurse",
+    role:t("labResults.doctor"),
     department: "Pediatrics",
-    status: "Active",
+    status: t("common.active"),
     lastLogin: "2023-05-15 10:20 AM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
@@ -65,9 +71,9 @@ const users = [
     id: "U005",
     name: "Sarah Thompson",
     email: "sarah.thompson@example.com",
-    role: "Administrator",
+    role: t("other.administrator"),
     department: "Administration",
-    status: "Active",
+    status: t("common.active"),
     lastLogin: "2023-05-15 07:30 AM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
@@ -75,9 +81,9 @@ const users = [
     id: "U006",
     name: "David Brown",
     email: "david.brown@example.com",
-    role: "Doctor",
+    role: t("labResults.doctor"),
     department: "Orthopedics",
-    status: "Inactive",
+    status: t("common.inactive"),
     lastLogin: "2023-05-10 11:45 AM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
@@ -85,9 +91,9 @@ const users = [
     id: "U007",
     name: "Jessica Lee",
     email: "jessica.lee@example.com",
-    role: "Nurse",
+    role:t("labResults.doctor"),
     department: "Emergency",
-    status: "Active",
+    status: t("common.active"),
     lastLogin: "2023-05-15 06:50 AM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
@@ -95,17 +101,13 @@ const users = [
     id: "U008",
     name: "Thomas Garcia",
     email: "thomas.garcia@example.com",
-    role: "Patient",
+    role: t("patients.patient"),
     department: "N/A",
-    status: "Active",
+    status: t("common.active"),
     lastLogin: "2023-05-14 04:15 PM",
     avatar: "/placeholder.svg?height=40&width=40",
   },
 ]
-
-export default function UsersPage() {
-  const { t } = useLanguage()
-  const [mounted, setMounted] = useState(false)
 
   // Only show animations after mounting to avoid hydration issues
   useEffect(() => {
@@ -175,16 +177,16 @@ export default function UsersPage() {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Button variant="outline" size="sm">
-            All Users
+            {t("users.allUsers")}
           </Button>
           <Button variant="outline" size="sm">
-            Doctors
+            {t("users.doctors")}
           </Button>
           <Button variant="outline" size="sm">
-            Nurses
+            {t("users.nurses")}
           </Button>
           <Button variant="outline" size="sm">
-            Administrators
+            {t("users.administrators")}
           </Button>
         </div>
       </motion.div>
@@ -243,14 +245,14 @@ export default function UsersPage() {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
                         <UserCog className="mr-2 h-4 w-4" />
-                        <span>{t("common.edit")} User</span>
+                        <span>{t("common.edit")} {t("users.user")}</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Reset Password</DropdownMenuItem>
+                      <DropdownMenuItem>{t("users.resetPassword")}</DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      {user.status === "Active" ? (
-                        <DropdownMenuItem className="text-destructive">Deactivate User</DropdownMenuItem>
+                      {user.status === t("common.active") ? (
+                        <DropdownMenuItem className="text-destructive">{t("users.deactivateUser")}</DropdownMenuItem>
                       ) : (
-                        <DropdownMenuItem>Activate User</DropdownMenuItem>
+                        <DropdownMenuItem>{t("users.activateUser")}</DropdownMenuItem>
                       )}
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -263,16 +265,16 @@ export default function UsersPage() {
 
       <motion.div variants={itemVariants} className="flex items-center justify-between">
         <div className="text-sm text-muted-foreground">
-          Showing <strong>1-8</strong> of <strong>24</strong> users
+          {t("other.Showing")} <strong>1-8</strong> of <strong>24</strong> {t("users.user")}
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="icon">
             <ChevronLeft className="h-4 w-4" />
-            <span className="sr-only">Previous page</span>
+            <span className="sr-only">{t("users.PreviousPage")}</span>
           </Button>
           <Button variant="outline" size="icon">
             <ChevronRight className="h-4 w-4" />
-            <span className="sr-only">Next page</span>
+            <span className="sr-only">{t("users.NextPage")}</span>
           </Button>
         </div>
       </motion.div>
@@ -284,12 +286,20 @@ function RoleBadge({ role }: { role: string }) {
   const getRoleProps = (role: string) => {
     switch (role) {
       case "Doctor":
+      case "Врач":
+      case "Shifokor":
         return { variant: "outline" as const, className: "border-blue-500 text-blue-500" }
       case "Nurse":
+      case "Медсестра":
+      case "Hamshira":
         return { variant: "outline" as const, className: "border-green-500 text-green-500" }
       case "Administrator":
+      case "Администраторы":
+      case "administrator":
         return { variant: "outline" as const, className: "border-purple-500 text-purple-500" }
       case "Patient":
+      case "Пациент":
+      case "Bemor":
         return { variant: "outline" as const, className: "border-yellow-500 text-yellow-500" }
       default:
         return { variant: "secondary" as const }
@@ -306,10 +316,11 @@ function RoleBadge({ role }: { role: string }) {
 }
 
 function StatusBadge({ status }: { status: string }) {
+  const { t } = useLanguage()
   return (
     <Badge
-      variant={status === "Active" ? "outline" : "secondary"}
-      className={status === "Active" ? "border-green-500 text-green-500" : ""}
+      variant={status === t("common.active") ? "outline" : "secondary"}
+      className={status === t("common.active") ? "border-green-500 text-green-500" : ""}
     >
       {status}
     </Badge>
